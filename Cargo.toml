@@ -1,0 +1,11 @@
+[package]
+name = "dwarf"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+lto = true
+
+[dependencies]
+egui = "0.17.0"
+eframe = "0.17.0"
