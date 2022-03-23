@@ -9,3 +9,5 @@ lto = true
 [dependencies]
 egui = "0.17.0"
 eframe = "0.17.0"
+native-dialog = "0.5.8"
+chrono = "0.4.19"
