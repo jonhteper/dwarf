@@ -1,14 +1,15 @@
 use chrono::Utc;
-use eframe::epi::App;
+use eframe::epi::{App, IconData};
 use eframe::{run_native, NativeOptions};
-use egui::{Button, CentralPanel, Color32, RichText, TextEdit, Vec2};
-use std::num::ParseFloatError;
-use std::sync::Arc;
-use std::{fs, io};
-
 use egui::style::Style;
 use egui::Response;
+use egui::{Button, CentralPanel, Color32, RichText, TextEdit, Vec2};
+use image::ImageError;
 use native_dialog::MessageType;
+use std::num::ParseFloatError;
+use std::path::PathBuf;
+use std::sync::Arc;
+use std::{env, fs, io};
 
 #[derive(Debug, PartialEq)]
 enum RadioOption {
@@ -252,7 +253,7 @@ impl SatApp {
             ))?;
 
         let file_content = format!(
-            "Reporte creado: {}\n Entrada: {}\nIVA: {}\nISR: {}\nLibre Impuestos: {}\nTotal: {}",
+            "Reporte creado: {}\nEntrada: {}\nIVA: {}\nISR: {}\nLibre Impuestos: {}\nTotal: {}",
             Utc::now().naive_local().format("%Y-%m-%d %H:%M:%S"),
             &self.n_input,
             &self.iva,
@@ -277,9 +278,35 @@ impl SatApp {
     }
 }
 
+#[cfg(target_os = "linux")]
+fn image_path() -> PathBuf {
+    PathBuf::from("/usr/share/dwarf/icon.png")
+}
+
+/// Try to read icon in the execution dir
+#[cfg(not(target_os = "linux"))]
+fn image_path() -> &str {
+    let mut path = env::current_exe().unwrap();
+    path.push("icon.png");
+
+    path
+}
+
+fn icon_data() -> Result<IconData, ImageError> {
+    let icon = image::open(image_path())?.to_rgba8();
+    let (icon_width, icon_height) = icon.dimensions();
+    Ok(IconData {
+        rgba: icon.into_raw(),
+        width: icon_width,
+        height: icon_height,
+    })
+}
+
 fn main() {
     let app = SatApp::default();
-    let win_option = NativeOptions::default();
+    let mut win_option = NativeOptions::default();
+    let icon = icon_data().expect("Failed to read icon app");
+    win_option.icon_data = Some(icon);
 
     run_native(Box::new(app), win_option);
 }

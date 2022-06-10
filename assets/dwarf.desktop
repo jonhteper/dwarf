@@ -6,4 +6,4 @@ Type=Application
 Terminal=false
 Exec=/usr/bin/dwarf
 Name=Dwarf - Calculadora RESICO
-Icon=/usr/share/dwarf/icon.svg
+Icon=/usr/share/dwarf/icon.png
