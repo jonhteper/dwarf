@@ -1,0 +1,9 @@
+...
+Para realizar el cálculo:
+1 - Selecciona entre los botones de Factura, Estándar e Invertido
+    * Factura:   Si sabes el dinero que quieres ganar y necesitas el importe de la factura
+    * Estándar:  Si tienes el subtotal de la factura y quieres conocer los demás cálculos ??
+    * Invertido: Si tienes el monto del depósito y quieres calcular los datos para general la factura.
+2 - Escribe la cantidad en la caja de texto
+3 - Presiona Calcular
+4 - Si lo deseas, puedes guardar en un archivo de texto los resultados
