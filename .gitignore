@@ -1,6 +1,10 @@
-/target
+**/target
+**/bin
+**/node_modules
 
-bin
+**/.idea
+**/.vscode
 
-.idea
-.vscode
+**/.desktop
+**/.directory
+
