@@ -3,7 +3,28 @@ import ResultsTable from './ResultsTable.vue';
 import CheckIcon from './CheckIcon.vue';
 import CancelIcon from './CancelIcon.vue';
 import DollarIcon from './DollarIcon.vue';
+import { bill, reversed_bill } from '../pkg/dwarf_wasm'
+import { ref } from 'vue'
 
+const user_input = ref('0');
+
+const instructions = [
+    'Ingresa cuánto dinero necesitas libre de impuestos',
+    'Ingresa el monto total de la factura'
+]
+
+
+const calc = () => {
+    console.warn('Calculando...')
+    const n = user_input.value;
+    console.warn(n);
+    console.warn(bill(parseFloat(n)).total)
+}
+
+const clear = () => {
+    user_input.value = '0';
+    console.warn('borrando')
+}
 </script>
 
 <template>
@@ -12,14 +33,16 @@ import DollarIcon from './DollarIcon.vue';
             <button>Factura</button>
             <button>Invertido</button>
         </div>
-        <i class="help-info">Ingresa cuánto dinero necesitas libre de impuestos</i>
+        <i class="help-info"></i>
         <div class="input-zone">
-            <DollarIcon/> <input class="principal-input" type="number" value="0" min="0">
+            <DollarIcon />
+            <input type="number" class="principal-input" v-model="user_input"
+                placeholder="Ingresa una cantidad">
 
-            <button title="Calcular">
+            <button title="Calcular" @click="calc">
                 <CheckIcon />
             </button>
-            <button title="Borrar">
+            <button title="Borrar" @click="clear">
                 <CancelIcon />
             </button>
         </div>
