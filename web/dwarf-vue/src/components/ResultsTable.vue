@@ -1,37 +1,26 @@
+<script setup>
+import { defineProps } from 'vue';
+import Row from './Row.vue';
+
+const props = defineProps(['results']);
+</script>
+
 <template>
     <div class="ResultsTable">
         <h2>Resultados</h2>
         <table>
-            <tr>
-                <th>Entrada</th>
-                <td>$ 0</td>
-            </tr>
-            <tr>
-                <th>IVA</th>
-                <td>$ 0</td>
-            </tr>
-            <tr>
-                <th>ISR</th>
-                <td>$ 0</td>
-            </tr>
-            <tr>
-                <th>Libre de impuestos</th>
-                <td>$ 0</td>
-            </tr>
-            <tr>
-                <th>Subtotal</th>
-                <td>$ 0</td>
-            </tr>
-            <tr>
-                <th>Total de la factura</th>
-                <td>$ 0</td>
-            </tr>
+            <Row title="Entrada" :value="props?.results?.input || '0'"/>
+            <Row title="IVA" :value="props?.results?.iva || '0'"/>
+            <Row title="ISR" :value="props?.results?.isr || '0'"/>
+            <Row title="Libre de impuestos" :value="props?.results?.taxes_free || '0'"/>
+            <Row title="Subtotal" :value="props?.results?.subtotal || '0'"/>
+            <Row title="Total de la factura" :value="props?.results?.total || '0'"/>
         </table>
         <button>Guardar</button>
     </div>
 </template>
 
-<style scoped>
+<style>
     .ResultsTable {
         display: inline-grid;
         text-align: center;

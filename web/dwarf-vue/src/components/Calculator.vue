@@ -3,30 +3,31 @@ import ResultsTable from './ResultsTable.vue';
 import CheckIcon from './CheckIcon.vue';
 import CancelIcon from './CancelIcon.vue';
 import DollarIcon from './DollarIcon.vue';
-import { bill, reversed_bill } from '../pkg/dwarf_wasm';
+import { bill, reversed_bill, BillResult } from '../pkg/dwarf_wasm';
 import { ref } from 'vue';
 import Tabs from './Tabs.vue';
 import { BillOptions } from '../utils/bill-options';
 
 const user_input = ref('0');
 const option_selected = ref(BillOptions.Bill);
+const bill_results = ref({});
 
 const update_option_selected = (option) => {
     option_selected.value = option;
 }
 
-
-
-
 const calc = () => {
     console.warn('Calculando...')
-    const n = parseFloat(user_input.value);
+    const n = parseFloat(user_input.value || 0);
     switch (option_selected.value) {
         case BillOptions.Bill:
-            console.warn(bill(n).total);
+            const r = bill(n);
+            bill_results.value = r;
+            console.warn(bill_results.value);
             break;
         case BillOptions.ReverseBill:
-            console.warn(reversed_bill(n).total);
+            bill_results.value = reversed_bill(n);
+            console.warn(bill_results.value);
             break
         default:
             alert('Opción no válida');
@@ -36,7 +37,7 @@ const calc = () => {
 
 const clear = () => {
     user_input.value = '0';
-    console.warn('borrando')
+    bill_results.value = {};
 }
 </script>
 
@@ -55,7 +56,7 @@ const clear = () => {
             </button>
         </div>
 
-        <ResultsTable />
+        <ResultsTable :results="bill_results" />
     </div>
 </template>
 
