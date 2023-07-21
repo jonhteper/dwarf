@@ -3,22 +3,35 @@ import ResultsTable from './ResultsTable.vue';
 import CheckIcon from './CheckIcon.vue';
 import CancelIcon from './CancelIcon.vue';
 import DollarIcon from './DollarIcon.vue';
-import { bill, reversed_bill } from '../pkg/dwarf_wasm'
-import { ref } from 'vue'
+import { bill, reversed_bill } from '../pkg/dwarf_wasm';
+import { ref } from 'vue';
+import Tabs from './Tabs.vue';
+import { BillOptions } from '../utils/bill-options';
 
 const user_input = ref('0');
+const option_selected = ref(BillOptions.Bill);
 
-const instructions = [
-    'Ingresa cuánto dinero necesitas libre de impuestos',
-    'Ingresa el monto total de la factura'
-]
+const update_option_selected = (option) => {
+    option_selected.value = option;
+}
+
+
 
 
 const calc = () => {
     console.warn('Calculando...')
-    const n = user_input.value;
-    console.warn(n);
-    console.warn(bill(parseFloat(n)).total)
+    const n = parseFloat(user_input.value);
+    switch (option_selected.value) {
+        case BillOptions.Bill:
+            console.warn(bill(n).total);
+            break;
+        case BillOptions.ReverseBill:
+            console.warn(reversed_bill(n).total);
+            break
+        default:
+            alert('Opción no válida');
+    }
+
 }
 
 const clear = () => {
@@ -29,15 +42,10 @@ const clear = () => {
 
 <template>
     <div class="Calculator">
-        <div class="calc-options">
-            <button>Factura</button>
-            <button>Invertido</button>
-        </div>
-        <i class="help-info"></i>
+        <Tabs @option-selected="update_option_selected" />
         <div class="input-zone">
             <DollarIcon />
-            <input type="number" class="principal-input" v-model="user_input"
-                placeholder="Ingresa una cantidad">
+            <input type="number" class="principal-input" v-model="user_input" placeholder="Ingresa una cantidad" min="0">
 
             <button title="Calcular" @click="calc">
                 <CheckIcon />
@@ -54,7 +62,7 @@ const clear = () => {
 <style scoped>
 .Calculator {
     display: inline-grid;
-    grid-template-rows: 60px 50px 60px auto;
+    grid-template-rows: 110px 60px auto;
     padding: 1%;
     text-align: center;
     box-shadow: -5px -1px 30px 3px rgba(0, 0, 0, 0.39);
