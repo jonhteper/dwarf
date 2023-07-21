@@ -7,6 +7,8 @@ import { bill, reversed_bill, BillResult } from '../pkg/dwarf_wasm';
 import { ref } from 'vue';
 import Tabs from './Tabs.vue';
 import { BillOptions } from '../utils/bill-options';
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css';
 
 const user_input = ref('0');
 const option_selected = ref(BillOptions.Bill);
@@ -17,17 +19,23 @@ const update_option_selected = (option) => {
 }
 
 const calc = () => {
-    console.warn('Calculando...')
     const n = parseFloat(user_input.value || 0);
+    if (n <= 0) {
+        toast("Ingresa un número mayor a 0", {
+            type: "warning",
+            position: "top-center",
+            autoClose: 3000,
+            transition: "slide",
+        })
+        return;
+    }
     switch (option_selected.value) {
         case BillOptions.Bill:
             const r = bill(n);
             bill_results.value = r;
-            console.warn(bill_results.value);
             break;
         case BillOptions.ReverseBill:
             bill_results.value = reversed_bill(n);
-            console.warn(bill_results.value);
             break
         default:
             alert('Opción no válida');
