@@ -1,22 +1,22 @@
 <script setup>
-import ResultsTable from './ResultsTable.vue';
-import CheckIcon from './CheckIcon.vue';
-import CancelIcon from './CancelIcon.vue';
-import DollarIcon from './DollarIcon.vue';
-import { bill, reversed_bill, BillResult } from '../pkg/dwarf_wasm';
-import { ref } from 'vue';
-import Tabs from './Tabs.vue';
-import { BillOptions } from '../utils/bill-options';
-import { toast } from 'vue3-toastify'
-import 'vue3-toastify/dist/index.css';
+import ResultsTable from "./ResultsTable.vue";
+import CheckIcon from "./CheckIcon.vue";
+import CancelIcon from "./CancelIcon.vue";
+import DollarIcon from "./DollarIcon.vue";
+import { bill, reversed_bill } from "../pkg/dwarf_wasm";
+import { ref } from "vue";
+import Tabs from "./Tabs.vue";
+import { BillOptions } from "../utils/bill-options";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
-const user_input = ref('0');
+const user_input = ref("0");
 const option_selected = ref(BillOptions.Bill);
 const bill_results = ref({});
 
 const update_option_selected = (option) => {
     option_selected.value = option;
-}
+};
 
 const calc = () => {
     const n = parseFloat(user_input.value || 0);
@@ -26,27 +26,25 @@ const calc = () => {
             position: "top-center",
             autoClose: 3000,
             transition: "slide",
-        })
+        });
         return;
     }
     switch (option_selected.value) {
         case BillOptions.Bill:
-            const r = bill(n);
-            bill_results.value = r;
+            bill_results.value = bill(n);
             break;
         case BillOptions.ReverseBill:
             bill_results.value = reversed_bill(n);
-            break
+            break;
         default:
-            alert('Opción no válida');
+            alert("Opción no válida");
     }
-
-}
+};
 
 const clear = () => {
-    user_input.value = '0';
+    user_input.value = "0";
     bill_results.value = {};
-}
+};
 </script>
 
 <template>
@@ -54,7 +52,13 @@ const clear = () => {
         <Tabs @option-selected="update_option_selected" />
         <div class="input-zone">
             <DollarIcon />
-            <input type="number" class="principal-input" v-model="user_input" placeholder="Ingresa una cantidad" min="0">
+            <input
+                type="number"
+                class="principal-input"
+                v-model="user_input"
+                placeholder="Ingresa una cantidad"
+                min="0"
+            />
 
             <button title="Calcular" @click="calc">
                 <CheckIcon />
