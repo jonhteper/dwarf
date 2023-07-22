@@ -1,5 +1,5 @@
 <script setup>
-import ResultsTable from "./ResultsTable.vue";
+import Results from "./Results.vue";
 import CheckIcon from "./CheckIcon.vue";
 import CancelIcon from "./CancelIcon.vue";
 import DollarIcon from "./DollarIcon.vue";
@@ -68,7 +68,7 @@ const clear = () => {
             </button>
         </div>
 
-        <ResultsTable :results="bill_results" />
+        <Results :results="bill_results" />
     </div>
 </template>
 
