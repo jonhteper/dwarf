@@ -1,9 +1,26 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps, watch, defineEmits } from "vue";
 import ResultCard from "./ResultCard.vue";
 import { read_storage } from "../utils/storage";
 
+const props = defineProps({
+    updateStorage: {
+        type: Boolean,
+        required: false,
+    },
+});
+const emits = defineEmits(["updated"]);
+
 const stored_bills = ref(read_storage());
+
+watch(
+    () => props.updateStorage,
+    () => {
+        stored_bills.value = read_storage();
+        console.warn("actualizando...");
+        emits("updated");
+    }
+);
 </script>
 <template>
     <div class="Storage">

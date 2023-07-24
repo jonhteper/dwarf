@@ -20,6 +20,7 @@ const props = defineProps({
 <template>
     <article class="Card" :data-id="props.dataId">
         <p>{{ props.index }}. Creada el: {{ props.date }}</p>
+        <button :data-id="props.dataId">Borrar</button>
         <button :data-id="props.dataId">Ver</button>
     </article>
 </template>

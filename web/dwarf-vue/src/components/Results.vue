@@ -1,11 +1,12 @@
 <script setup>
-import { computed, defineProps, ref } from "vue";
+import { computed, defineProps, defineEmits } from "vue";
 import { save_in_storage } from "../utils/storage";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import ResultsTable from "./ResultsTable.vue";
 
 const props = defineProps(["results"]);
+const emits = defineEmits(["saved"]);
 
 const is_ok = computed(() => props?.results?.total !== undefined);
 
@@ -26,6 +27,7 @@ const save = () => {
         autoClose: 3000,
         transition: "slide",
     });
+    emits("saved");
 };
 </script>
 

@@ -13,6 +13,7 @@ import "vue3-toastify/dist/index.css";
 const user_input = ref("0");
 const option_selected = ref(BillOptions.Bill);
 const bill_results = ref({});
+const emits = defineEmits(["saved"]);
 
 const update_option_selected = (option) => {
     option_selected.value = option;
@@ -45,6 +46,10 @@ const clear = () => {
     user_input.value = "0";
     bill_results.value = {};
 };
+
+const emitSaved = () => {
+    emits("saved");
+};
 </script>
 
 <template>
@@ -68,7 +73,7 @@ const clear = () => {
             </button>
         </div>
 
-        <Results :results="bill_results" />
+        <Results :results="bill_results" @saved="emitSaved" />
     </div>
 </template>
 
