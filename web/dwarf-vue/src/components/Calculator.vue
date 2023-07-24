@@ -1,9 +1,9 @@
 <script setup>
 import Results from "./Results.vue";
-import CheckIcon from "./CheckIcon.vue";
-import CancelIcon from "./CancelIcon.vue";
-import DollarIcon from "./DollarIcon.vue";
-import { bill, reversed_bill } from "../pkg/dwarf_wasm";
+import CheckIcon from "./icons/CheckIcon.vue";
+import CancelIcon from "./icons/CancelIcon.vue";
+import DollarIcon from "./icons/DollarIcon.vue";
+import { bill, reversed_bill } from "../utils/dwarf/dwarf_wasm";
 import { ref } from "vue";
 import Tabs from "./Tabs.vue";
 import { BillOptions } from "../utils/bill-options";
