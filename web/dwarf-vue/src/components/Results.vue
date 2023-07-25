@@ -1,12 +1,13 @@
 <script setup>
-import { computed, defineProps, defineEmits } from "vue";
-import { save_in_storage } from "../utils/storage";
+import { computed, defineProps } from "vue";
+import { read_storage, save_in_storage } from "../utils/storage";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import ResultsTable from "./ResultsTable.vue";
+import { useStore } from "vuex";
 
 const props = defineProps(["results"]);
-const emits = defineEmits(["saved"]);
+const store = useStore();
 
 const is_ok = computed(() => props?.results?.total !== undefined);
 
@@ -27,7 +28,7 @@ const save = () => {
         autoClose: 3000,
         transition: "slide",
     });
-    emits("saved");
+    store.commit("updateStoredBills");
 };
 </script>
 
