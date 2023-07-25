@@ -1,12 +1,12 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import ResultCard from "./ResultCard.vue";
 import { useStore } from "vuex";
 import ResultModal from "./ResultModal.vue";
 
 const store = useStore();
 
-const stored_bills = computed(() => store.getters.storedBills);
+const storedBills = computed(() => store.getters.storedBills);
 
 </script>
 <template>
@@ -14,7 +14,7 @@ const stored_bills = computed(() => store.getters.storedBills);
         <h2>Resultados guardados</h2>
         <div class="storage-list">
             <ResultCard
-                v-for="([key, value], index) in stored_bills"
+                v-for="([key, value], index) in storedBills"
                 :key="key"
                 :dataId="key"
                 :date="value.createdAt"

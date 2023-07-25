@@ -1,20 +1,20 @@
 <script setup>
-import Row from "./Row.vue";
+import TableRow from "./TableRow.vue";
 
 const props = defineProps(["results"]);
 </script>
 
 <template>
     <table class="ResultsTable">
-        <Row title="Entrada" :value="props?.results?.input || '$ 0'" />
-        <Row title="IVA" :value="props?.results?.iva || '$ 0'" />
-        <Row title="ISR" :value="props?.results?.isr || '$ 0'" />
-        <Row
+        <TableRow title="Entrada" :value="props?.results?.input || '$ 0'" />
+        <TableRow title="IVA" :value="props?.results?.iva || '$ 0'" />
+        <TableRow title="ISR" :value="props?.results?.isr || '$ 0'" />
+        <TableRow
             title="Libre de impuestos"
             :value="props?.results?.taxesFree || '$ 0'"
         />
-        <Row title="Subtotal" :value="props?.results?.subtotal || '$ 0'" />
-        <Row
+        <TableRow title="Subtotal" :value="props?.results?.subtotal || '$ 0'" />
+        <TableRow
             title="Total de la factura"
             :value="props?.results?.total || '$ 0'"
         />

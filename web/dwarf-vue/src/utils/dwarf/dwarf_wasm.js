@@ -1,17 +1,8 @@
 let wasm;
 
-const cachedTextDecoder =
-    typeof TextDecoder !== "undefined"
-        ? new TextDecoder("utf-8", { ignoreBOM: true, fatal: true })
-        : {
-              decode: () => {
-                  throw Error("TextDecoder not available");
-              },
-          };
+const cachedTextDecoder = (typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-8', { ignoreBOM: true, fatal: true }) : { decode: () => { throw Error('TextDecoder not available') } } );
 
-if (typeof TextDecoder !== "undefined") {
-    cachedTextDecoder.decode();
-}
+if (typeof TextDecoder !== 'undefined') { cachedTextDecoder.decode(); };
 
 let cachedUint8Memory0 = null;
 
@@ -38,36 +29,27 @@ function getInt32Memory0() {
 
 let WASM_VECTOR_LEN = 0;
 
-const cachedTextEncoder =
-    typeof TextEncoder !== "undefined"
-        ? new TextEncoder("utf-8")
-        : {
-              encode: () => {
-                  throw Error("TextEncoder not available");
-              },
-          };
+const cachedTextEncoder = (typeof TextEncoder !== 'undefined' ? new TextEncoder('utf-8') : { encode: () => { throw Error('TextEncoder not available') } } );
 
-const encodeString =
-    typeof cachedTextEncoder.encodeInto === "function"
-        ? function (arg, view) {
-              return cachedTextEncoder.encodeInto(arg, view);
-          }
-        : function (arg, view) {
-              const buf = cachedTextEncoder.encode(arg);
-              view.set(buf);
-              return {
-                  read: arg.length,
-                  written: buf.length,
-              };
-          };
+const encodeString = (typeof cachedTextEncoder.encodeInto === 'function'
+    ? function (arg, view) {
+    return cachedTextEncoder.encodeInto(arg, view);
+}
+    : function (arg, view) {
+    const buf = cachedTextEncoder.encode(arg);
+    view.set(buf);
+    return {
+        read: arg.length,
+        written: buf.length
+    };
+});
 
 function passStringToWasm0(arg, malloc, realloc) {
+
     if (realloc === undefined) {
         const buf = cachedTextEncoder.encode(arg);
         const ptr = malloc(buf.length, 1) >>> 0;
-        getUint8Memory0()
-            .subarray(ptr, ptr + buf.length)
-            .set(buf);
+        getUint8Memory0().subarray(ptr, ptr + buf.length).set(buf);
         WASM_VECTOR_LEN = buf.length;
         return ptr;
     }
@@ -81,7 +63,7 @@ function passStringToWasm0(arg, malloc, realloc) {
 
     for (; offset < len; offset++) {
         const code = arg.charCodeAt(offset);
-        if (code > 0x7f) break;
+        if (code > 0x7F) break;
         mem[ptr + offset] = code;
     }
 
@@ -89,7 +71,7 @@ function passStringToWasm0(arg, malloc, realloc) {
         if (offset !== 0) {
             arg = arg.slice(offset);
         }
-        ptr = realloc(ptr, len, (len = offset + arg.length * 3), 1) >>> 0;
+        ptr = realloc(ptr, len, len = offset + arg.length * 3, 1) >>> 0;
         const view = getUint8Memory0().subarray(ptr + offset, ptr + len);
         const ret = encodeString(arg, view);
 
@@ -100,26 +82,27 @@ function passStringToWasm0(arg, malloc, realloc) {
     return ptr;
 }
 /**
- * @param {number} input
- * @returns {BillResult | undefined}
- */
+* @param {number} input
+* @returns {BillResult | undefined}
+*/
 export function bill(input) {
     const ret = wasm.bill(input);
     return ret === 0 ? undefined : BillResult.__wrap(ret);
 }
 
 /**
- * @param {number} input
- * @returns {BillResult | undefined}
- */
-export function reversed_bill(input) {
-    const ret = wasm.reversed_bill(input);
+* @param {number} input
+* @returns {BillResult | undefined}
+*/
+export function reversedBill(input) {
+    const ret = wasm.reversedBill(input);
     return ret === 0 ? undefined : BillResult.__wrap(ret);
 }
 
 /**
- */
+*/
 export class BillResult {
+
     static __wrap(ptr) {
         ptr = ptr >>> 0;
         const obj = Object.create(BillResult.prototype);
@@ -140,8 +123,8 @@ export class BillResult {
         wasm.__wbg_billresult_free(ptr);
     }
     /**
-     * @returns {string}
-     */
+    * @returns {string}
+    */
     get input() {
         let deferred1_0;
         let deferred1_1;
@@ -159,20 +142,16 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
+    * @param {string} arg0
+    */
     set input(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
         wasm.__wbg_set_billresult_input(this.__wbg_ptr, ptr0, len0);
     }
     /**
-     * @returns {string}
-     */
+    * @returns {string}
+    */
     get iva() {
         let deferred1_0;
         let deferred1_1;
@@ -190,20 +169,16 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
+    * @param {string} arg0
+    */
     set iva(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
         wasm.__wbg_set_billresult_iva(this.__wbg_ptr, ptr0, len0);
     }
     /**
-     * @returns {string}
-     */
+    * @returns {string}
+    */
     get isr() {
         let deferred1_0;
         let deferred1_1;
@@ -221,26 +196,22 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
+    * @param {string} arg0
+    */
     set isr(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
         wasm.__wbg_set_billresult_isr(this.__wbg_ptr, ptr0, len0);
     }
     /**
-     * @returns {string}
-     */
-    get taxes_free() {
+    * @returns {string}
+    */
+    get taxesFree() {
         let deferred1_0;
         let deferred1_1;
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.__wbg_get_billresult_taxes_free(retptr, this.__wbg_ptr);
+            wasm.__wbg_get_billresult_taxesFree(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             deferred1_0 = r0;
@@ -252,20 +223,16 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
-    set taxes_free(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+    * @param {string} arg0
+    */
+    set taxesFree(arg0) {
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.__wbg_set_billresult_taxes_free(this.__wbg_ptr, ptr0, len0);
+        wasm.__wbg_set_billresult_taxesFree(this.__wbg_ptr, ptr0, len0);
     }
     /**
-     * @returns {string}
-     */
+    * @returns {string}
+    */
     get subtotal() {
         let deferred1_0;
         let deferred1_1;
@@ -283,20 +250,16 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
+    * @param {string} arg0
+    */
     set subtotal(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
         wasm.__wbg_set_billresult_subtotal(this.__wbg_ptr, ptr0, len0);
     }
     /**
-     * @returns {string}
-     */
+    * @returns {string}
+    */
     get total() {
         let deferred1_0;
         let deferred1_1;
@@ -314,30 +277,25 @@ export class BillResult {
         }
     }
     /**
-     * @param {string} arg0
-     */
+    * @param {string} arg0
+    */
     set total(arg0) {
-        const ptr0 = passStringToWasm0(
-            arg0,
-            wasm.__wbindgen_malloc,
-            wasm.__wbindgen_realloc
-        );
+        const ptr0 = passStringToWasm0(arg0, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
         wasm.__wbg_set_billresult_total(this.__wbg_ptr, ptr0, len0);
     }
 }
 
 async function __wbg_load(module, imports) {
-    if (typeof Response === "function" && module instanceof Response) {
-        if (typeof WebAssembly.instantiateStreaming === "function") {
+    if (typeof Response === 'function' && module instanceof Response) {
+        if (typeof WebAssembly.instantiateStreaming === 'function') {
             try {
                 return await WebAssembly.instantiateStreaming(module, imports);
+
             } catch (e) {
-                if (module.headers.get("Content-Type") != "application/wasm") {
-                    console.warn(
-                        "`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n",
-                        e
-                    );
+                if (module.headers.get('Content-Type') != 'application/wasm') {
+                    console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
+
                 } else {
                     throw e;
                 }
@@ -346,11 +304,13 @@ async function __wbg_load(module, imports) {
 
         const bytes = await module.arrayBuffer();
         return await WebAssembly.instantiate(bytes, imports);
+
     } else {
         const instance = await WebAssembly.instantiate(module, imports);
 
         if (instance instanceof WebAssembly.Instance) {
             return { instance, module };
+
         } else {
             return instance;
         }
@@ -360,20 +320,23 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
     const imports = {};
     imports.wbg = {};
-    imports.wbg.__wbindgen_throw = function (arg0, arg1) {
+    imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
 
     return imports;
 }
 
-function __wbg_init_memory(imports, maybe_memory) {}
+function __wbg_init_memory(imports, maybe_memory) {
+
+}
 
 function __wbg_finalize_init(instance, module) {
     wasm = instance.exports;
     __wbg_init.__wbindgen_wasm_module = module;
     cachedInt32Memory0 = null;
     cachedUint8Memory0 = null;
+
 
     return wasm;
 }
@@ -397,16 +360,12 @@ function initSync(module) {
 async function __wbg_init(input) {
     if (wasm !== undefined) return wasm;
 
-    if (typeof input === "undefined") {
-        input = new URL("dwarf_wasm_bg.wasm", import.meta.url);
+    if (typeof input === 'undefined') {
+        input = new URL('dwarf_wasm_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
-    if (
-        typeof input === "string" ||
-        (typeof Request === "function" && input instanceof Request) ||
-        (typeof URL === "function" && input instanceof URL)
-    ) {
+    if (typeof input === 'string' || (typeof Request === 'function' && input instanceof Request) || (typeof URL === 'function' && input instanceof URL)) {
         input = fetch(input);
     }
 
@@ -417,5 +376,5 @@ async function __wbg_init(input) {
     return __wbg_finalize_init(instance, module);
 }
 
-export { initSync };
+export { initSync }
 export default __wbg_init;

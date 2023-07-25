@@ -4,7 +4,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 
 const store = useStore();
-const is_ok = computed(() => store.getters.selectedBill?.total !== undefined);
+const isOk = computed(() => store.getters.selectedBill?.total !== undefined);
 const results = computed(() => store.getters.selectedBill);
 
 const closeModal = () => {
@@ -13,7 +13,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <div class="ModalShadow" v-show="is_ok">
+    <div class="ModalShadow" v-show="isOk">
         <div class="ModalResult">
             <h2>Resultado</h2>
             <p>Creado:</p>

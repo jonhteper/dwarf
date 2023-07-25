@@ -1,14 +1,14 @@
 import { createStore } from "vuex";
-import { read_storage } from "./utils/storage";
+import { readStorage } from "./utils/storage";
 
 export default createStore({
     state: {
-        storedBills: read_storage(),
+        storedBills: readStorage(),
         selectedBill: {},
     },
     mutations: {
         updateStoredBills(state) {
-            state.storedBills = read_storage();
+            state.storedBills = readStorage();
         },
         updateSelectedBill(state, key) {
             state.selectedBill = state.storedBills.get(key);

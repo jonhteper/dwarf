@@ -1,15 +1,13 @@
 <script setup>
-import { ref } from "vue";
-import Calculator from "./components/Calculator.vue";
-import Storage from "./components/Storage.vue";
+import CalculatorWidget from "./components/CalculatorWidget.vue";
+import ResultsStorage from "./components/ResultsStorage.vue";
 
-const updateStorage = ref(false);
 </script>
 
 <template>
     <h1 class="title">Calculadora Resico</h1>
-    <Calculator />
-    <Storage />
+    <CalculatorWidget />
+    <ResultsStorage />
 </template>
 
 <style scoped>

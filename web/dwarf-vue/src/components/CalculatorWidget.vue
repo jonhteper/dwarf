@@ -1,25 +1,25 @@
 <script setup>
-import Results from "./Results.vue";
+import ResultsBox from "./ResultsBox.vue";
 import CheckIcon from "./icons/CheckIcon.vue";
 import CancelIcon from "./icons/CancelIcon.vue";
 import DollarIcon from "./icons/DollarIcon.vue";
-import { bill, reversed_bill } from "../utils/dwarf/dwarf_wasm";
+import { bill, reversedBill } from "../utils/dwarf/dwarf_wasm";
 import { ref } from "vue";
-import Tabs from "./Tabs.vue";
+import BillOptionTabs from "./BillOptionTabs.vue";
 import { BillOptions } from "../utils/bill-options";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
-const user_input = ref("0");
-const option_selected = ref(BillOptions.Bill);
-const bill_results = ref({});
+const userInput = ref("0");
+const optionSelected = ref(BillOptions.Bill);
+const billResults = ref({});
 
-const update_option_selected = (option) => {
-    option_selected.value = option;
+const updateOptionSelected = (option) => {
+    optionSelected.value = option;
 };
 
 const calc = () => {
-    const n = parseFloat(user_input.value || 0);
+    const n = parseFloat(userInput.value || 0);
     if (n <= 0) {
         toast("Ingresa un número mayor a 0", {
             type: "warning",
@@ -29,12 +29,12 @@ const calc = () => {
         });
         return;
     }
-    switch (option_selected.value) {
+    switch (optionSelected.value) {
         case BillOptions.Bill:
-            bill_results.value = bill(n);
+            billResults.value = bill(n);
             break;
         case BillOptions.ReverseBill:
-            bill_results.value = reversed_bill(n);
+            billResults.value = reversedBill(n);
             break;
         default:
             alert("Opción no válida");
@@ -42,20 +42,20 @@ const calc = () => {
 };
 
 const clear = () => {
-    user_input.value = "0";
-    bill_results.value = {};
+    userInput.value = "0";
+    billResults.value = {};
 };
 </script>
 
 <template>
     <div class="Calculator">
-        <Tabs @option-selected="update_option_selected" />
+        <BillOptionTabs @option-selected="updateOptionSelected" />
         <div class="input-zone">
             <DollarIcon />
             <input
                 type="number"
                 class="principal-input"
-                v-model="user_input"
+                v-model="userInput"
                 placeholder="Ingresa una cantidad"
                 min="0"
             />
@@ -68,7 +68,7 @@ const clear = () => {
             </button>
         </div>
 
-        <Results :results="bill_results" />
+        <ResultsBox :results="billResults" />
     </div>
 </template>
 

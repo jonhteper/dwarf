@@ -4,40 +4,40 @@ import { BillOptions } from "../utils/bill-options";
 
 const emits = defineEmits(["option-selected"]);
 
-const info_options = [
+const infoOptions = [
     "Ingresa cuánto dinero necesitas libre de impuestos.",
     "Ingresa el monto total de la factura para obtener los valores.",
 ];
 
-const option_selected = ref(BillOptions.Bill);
+const optionSelected = ref(BillOptions.Bill);
 
-const text_info = ref(info_options[option_selected.value]);
+const textInfo = ref(infoOptions[optionSelected.value]);
 
-const change_option = (event) => {
+const changeOption = (event) => {
     const option = parseInt(event.target.dataset.option);
-    option_selected.value = option;
-    text_info.value = info_options[option];
-    emits("option-selected", option_selected.value);
+    optionSelected.value = option;
+    textInfo.value = infoOptions[option];
+    emits("option-selected", optionSelected.value);
 };
 </script>
 
 <template>
     <div class="calc-options">
         <button
-            @click="change_option"
+            @click="changeOption"
             :data-option="BillOptions.Bill"
-            :class="{ active: option_selected == BillOptions.Bill }"
+            :class="{ active: optionSelected == BillOptions.Bill }"
         >
             Factura a empresa
         </button>
         <button
-            @click="change_option"
+            @click="changeOption"
             :data-option="BillOptions.ReverseBill"
-            :class="{ active: option_selected == BillOptions.ReverseBill }"
+            :class="{ active: optionSelected == BillOptions.ReverseBill }"
         >
             Desde factura a empresa
         </button>
-        <i class="help-info">{{ text_info }}</i>
+        <i class="help-info">{{ textInfo }}</i>
     </div>
 </template>
 

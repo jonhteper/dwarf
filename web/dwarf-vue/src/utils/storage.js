@@ -1,32 +1,32 @@
 const LOCAL_STORAGE_NAME = "resico.db";
 
-export const save_in_storage = (bill) => {
-    let bills_map = read_storage();
+export const saveInStorage = (bill) => {
+    let billsMap = readStorage();
     let now = Date.now();
-    bills_map.set(now.toString(), {
+    billsMap.set(now.toString(), {
         input: bill.input,
         isr: bill.isr,
         iva: bill.iva,
         subtotal: bill.subtotal,
-        taxesFree: bill.taxes_free,
+        taxesFree: bill.taxesFree,
         total: bill.total,
         createdAt: new Date(now).toLocaleString(),
     });
     localStorage.setItem(
         LOCAL_STORAGE_NAME,
-        JSON.stringify(Object.fromEntries(bills_map))
+        JSON.stringify(Object.fromEntries(billsMap))
     );
 
-    return bills_map;
+    return billsMap;
 };
 
-export const read_storage = () => {
-    const saved_values = localStorage.getItem(LOCAL_STORAGE_NAME) || "{}";
-    return new Map(Object.entries(JSON.parse(saved_values)));
+export const readStorage = () => {
+    const savedValues = localStorage.getItem(LOCAL_STORAGE_NAME) || "{}";
+    return new Map(Object.entries(JSON.parse(savedValues)));
 };
 
 export const deleteBill = (key) => {
-    const savedBills = read_storage();
+    const savedBills = readStorage();
     savedBills.delete(key);
 
     localStorage.setItem(
