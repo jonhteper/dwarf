@@ -11,7 +11,7 @@ const props = defineProps(["results"]);
         <Row title="ISR" :value="props?.results?.isr || '$ 0'" />
         <Row
             title="Libre de impuestos"
-            :value="props?.results?.taxes_free || '$ 0'"
+            :value="props?.results?.taxesFree || '$ 0'"
         />
         <Row title="Subtotal" :value="props?.results?.subtotal || '$ 0'" />
         <Row

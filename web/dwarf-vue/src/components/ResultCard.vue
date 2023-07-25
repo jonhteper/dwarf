@@ -32,7 +32,13 @@ const deleteCard = (event) => {
     });
 };
 
-const showBill = () => {};
+const showBill = (event) => {
+    const id = event.target.dataset.id;
+    store.commit("updateSelectedBill", id);
+    console.warn(id);
+};
+
+
 </script>
 
 <template>

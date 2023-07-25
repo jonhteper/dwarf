@@ -1,11 +1,13 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import ResultCard from "./ResultCard.vue";
 import { useStore } from "vuex";
+import ResultModal from "./ResultModal.vue";
 
 const store = useStore();
 
 const stored_bills = computed(() => store.getters.storedBills);
+
 </script>
 <template>
     <div class="Storage">
@@ -19,5 +21,6 @@ const stored_bills = computed(() => store.getters.storedBills);
                 :index="index + 1"
             />
         </div>
+        <ResultModal />
     </div>
 </template>
