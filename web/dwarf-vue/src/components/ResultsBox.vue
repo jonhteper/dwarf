@@ -33,7 +33,7 @@ const save = () => {
 </script>
 
 <template>
-    <div class="Results" v-if="isOk">
+    <div class="Results" v-show="isOk">
         <h2>Resultados</h2>
         <ResultsTable :results="props.results" />
         <button @click="save" :disabled="!isOk">Guardar</button>
