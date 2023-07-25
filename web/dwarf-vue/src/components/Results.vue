@@ -1,6 +1,6 @@
 <script setup>
 import { computed, defineProps } from "vue";
-import { read_storage, save_in_storage } from "../utils/storage";
+import { save_in_storage } from "../utils/storage";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import ResultsTable from "./ResultsTable.vue";

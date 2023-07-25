@@ -1,14 +1,11 @@
 <script setup>
-import { ref, defineProps, watch, defineEmits, computed } from "vue";
+import { computed } from "vue";
 import ResultCard from "./ResultCard.vue";
-import { read_storage } from "../utils/storage";
 import { useStore } from "vuex";
 
 const store = useStore();
 
 const stored_bills = computed(() => store.getters.storedBills);
-
-
 </script>
 <template>
     <div class="Storage">

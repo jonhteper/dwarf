@@ -4,8 +4,6 @@ import Calculator from "./components/Calculator.vue";
 import Storage from "./components/Storage.vue";
 
 const updateStorage = ref(false);
-
-
 </script>
 
 <template>

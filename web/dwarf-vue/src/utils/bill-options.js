@@ -1,4 +1,4 @@
 export const BillOptions = {
-  Bill: 0,
-  ReverseBill: 1,
+    Bill: 0,
+    ReverseBill: 1,
 };
