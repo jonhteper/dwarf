@@ -24,3 +24,13 @@ export const read_storage = () => {
     const saved_values = localStorage.getItem(LOCAL_STORAGE_NAME) || "{}";
     return new Map(Object.entries(JSON.parse(saved_values)));
 };
+
+export const deleteBill = (key) => {
+    const savedBills = read_storage();
+    savedBills.delete(key);
+
+    localStorage.setItem(
+        LOCAL_STORAGE_NAME,
+        JSON.stringify(Object.fromEntries(savedBills))
+    );
+};
