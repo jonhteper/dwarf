@@ -27,6 +27,7 @@ const closeModal = () => {
 .ModalShadow {
     position: absolute;
     top: 0;
+    left: 0;
     background-color: #1a1a1a88;
     backdrop-filter: blur(18px);
     width: 100vw;
