@@ -21,6 +21,7 @@ const updateOptionSelected = (option) => {
 const calc = () => {
     const n = parseFloat(userInput.value || 0);
     if (n <= 0) {
+        userInput.value = "0";
         toast("Ingresa un número mayor a 0", {
             type: "warning",
             position: "top-center",
