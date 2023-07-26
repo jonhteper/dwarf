@@ -12,7 +12,6 @@ export default createStore({
         },
         updateSelectedBill(state, key) {
             state.selectedBill = state.storedBills.get(key);
-            console.warn(state.selectedBill)
         },
         clearSelectedBill(state) {
             state.selectedBill = {};
