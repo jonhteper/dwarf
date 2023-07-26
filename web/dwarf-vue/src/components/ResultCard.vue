@@ -54,7 +54,6 @@ const showBill = (event) => {
     const id = event.target.dataset.id;
     store.commit("updateSelectedBill", id);
 };
-
 </script>
 
 <template>
