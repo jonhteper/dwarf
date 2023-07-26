@@ -61,11 +61,13 @@ const clear = () => {
                 min="0"
             />
 
-            <button title="Calcular" @click="calc">
+            <button class="calc-btn" title="Calcular" @click="calc">
                 <CheckIcon />
+                <p class="btn-text">Calcular</p>
             </button>
-            <button title="Borrar" @click="clear">
+            <button class="clear-btn" title="Borrar" @click="clear">
                 <CancelIcon />
+                <p class="btn-text">Borrar</p>
             </button>
         </div>
 
@@ -86,12 +88,6 @@ const clear = () => {
     margin: auto;
 }
 
-.calc-options {
-    display: inline-grid;
-    grid-template-columns: 50% 50%;
-    padding: 1%;
-    gap: 7px;
-}
 
 .input-zone {
     display: inline-grid;
@@ -122,6 +118,10 @@ button svg {
     height: 20px;
 }
 
+button .btn-text {
+    display: none;
+}
+
 .principal-input {
     border-radius: 0.5rem;
     border: none;
@@ -132,6 +132,40 @@ button svg {
     font-size: 20px;
 }
 
+@media screen and (max-width: 600px) {
+    .Calculator {
+        grid-template-rows: 140px 100px auto;
+    }
+    .input-zone {
+        grid-template-columns: 30px 1fr 1fr;
+        grid-template-areas: "dollar input input" ". clear calc";
+        height: auto;
+    }
+    .principal-input {
+        grid-area: input;
+    }
+
+    .input-zone button {
+        width: 110px;
+        height: 40px;
+        border-radius: 0.5rem;
+    }
+
+    button svg {
+        display: none;
+    }
+
+    button .btn-text {
+        display: inline;
+    }
+
+    .calc-btn {
+        grid-area: calc;
+    }
+    .clear-btn {
+        grid-area: clear;
+    }
+}
 @media (prefers-color-scheme: light) {
     .principal-input {
         color: rgb(126, 126, 126);

@@ -23,4 +23,10 @@ import ResultsStorage from "./components/ResultsStorage.vue";
     text-align: center;
     padding: 25px 0;
 }
+
+@media screen and (max-width: 700px) {
+    .title {
+        font-size: 35px;
+    }
+}
 </style>

@@ -44,7 +44,7 @@ const changeOption = (event) => {
 <style scoped>
 .calc-options {
     display: inline-grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto auto;
     grid-template-rows: 50% 50%;
     grid-template-areas: "btn1 btn2" "info info";
     padding: 1%;
