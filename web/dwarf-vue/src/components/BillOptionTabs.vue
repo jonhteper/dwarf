@@ -5,7 +5,7 @@ import { BillOptions } from "../utils/bill-options";
 const emits = defineEmits(["option-selected"]);
 
 const infoOptions = [
-    "Ingresa cuánto dinero necesitas libre de impuestos.",
+    "Ingresa la cantidad que quieres libre de impuestos.",
     "Ingresa el monto total de la factura para obtener los valores.",
 ];
 
