@@ -26,13 +26,27 @@ const store = useStore();
 
 const deleteCard = (event) => {
     const id = event.target.dataset.id;
-    deleteBill(id);
-    store.commit("updateStoredBills");
-    toast("Eliminado correctamente.", {
-        type: "success",
+    let aborted = false;
+    const cardBox = event.target.parentElement.parentElement;
+    cardBox.style.display = "none";
+
+    toast("Eliminado. <a>Haga click para cancelar.</a>", {
+        type: "warning",
+        dangerouslyHTMLString: true,
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 4000,
         transition: "slide",
+        onClick: () => {
+            aborted = true;
+            cardBox.style.display = "flex";
+        },
+        onClose: () => {
+            if (aborted) {
+                return;
+            }
+            deleteBill(id);
+            store.commit("updateStoredBills");
+        },
     });
 };
 
