@@ -83,7 +83,6 @@ const clear = () => {
     max-width: 700px;
     width: 99%;
     margin: auto;
-
 }
 
 .calc-options {

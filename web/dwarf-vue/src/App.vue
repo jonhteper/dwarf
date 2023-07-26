@@ -1,7 +1,6 @@
 <script setup>
 import CalculatorWidget from "./components/CalculatorWidget.vue";
 import ResultsStorage from "./components/ResultsStorage.vue";
-
 </script>
 
 <template>
@@ -19,11 +18,9 @@ import ResultsStorage from "./components/ResultsStorage.vue";
     width: 100%;
     padding: 1%;
     text-align: center;
-
 }
 .title {
     text-align: center;
     padding: 25px 0;
 }
-
 </style>

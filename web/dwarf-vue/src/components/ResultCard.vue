@@ -20,7 +20,7 @@ const props = defineProps({
     total: {
         type: String,
         required: true,
-    }
+    },
 });
 const store = useStore();
 
@@ -41,8 +41,6 @@ const showBill = (event) => {
     store.commit("updateSelectedBill", id);
     console.warn(id);
 };
-
-
 </script>
 
 <template>

@@ -7,7 +7,6 @@ import ResultModal from "./ResultModal.vue";
 const store = useStore();
 
 const storedBills = computed(() => store.getters.storedBills);
-
 </script>
 <template>
     <div class="Storage">
@@ -43,5 +42,4 @@ const storedBills = computed(() => store.getters.storedBills);
     padding: 2%;
     /* outline: 1px solid red; */
 }
-
 </style>
