@@ -1,7 +1,7 @@
 <script setup>
 import ResultsTable from "./ResultsTable.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 const store = useStore();
 const isOk = computed(() => store.getters.selectedBill?.total !== undefined);
@@ -10,6 +10,16 @@ const results = computed(() => store.getters.selectedBill);
 const closeModal = () => {
     store.commit("clearSelectedBill");
 };
+
+watch(isOk, () => {
+    if (isOk.value) {
+        document.body.style.overflow = "hidden";
+        window.scrollTo(0, 0);
+    } else {
+        document.body.style.overflow = "auto";
+    }
+});
+
 </script>
 
 <template>
@@ -38,7 +48,7 @@ const closeModal = () => {
 }
 
 .ModalResult {
-    background-color: black;
+    background-color: var(--bg-color);
     border-radius: 0.5rem;
     width: 90%;
     max-width: 900px;
