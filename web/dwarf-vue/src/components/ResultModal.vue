@@ -16,7 +16,7 @@ const closeModal = () => {
     <div class="ModalShadow" v-show="isOk">
         <div class="ModalResult">
             <h2>Resultado</h2>
-            <p>Creado:</p>
+            <p>Creado el: {{ results.createdAt }}</p>
             <ResultsTable :results="results" />
             <button @click="closeModal">Cerrar</button>
         </div>
