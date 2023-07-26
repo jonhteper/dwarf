@@ -85,4 +85,10 @@ const showBill = (event) => {
     display: flex;
     gap: 10px;
 }
+@media (prefers-color-scheme: light) {
+    .Card {
+        border-color: var(--ligth-secondary-bg-color);
+    }
+}
+
 </style>

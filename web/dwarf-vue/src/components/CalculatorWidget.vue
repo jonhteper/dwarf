@@ -78,7 +78,7 @@ const clear = () => {
     grid-template-rows: 110px 60px auto;
     padding: 1%;
     text-align: center;
-    box-shadow: -5px -1px 30px 3px rgba(0, 0, 0, 0.39);
+    box-shadow: var(--box-shadow);
     border-radius: 1rem;
     max-width: 700px;
     width: 99%;
@@ -124,10 +124,16 @@ button svg {
 .principal-input {
     border-radius: 0.5rem;
     border: none;
-    box-shadow: -5px -1px 30px 3px rgba(0, 0, 0, 0.39);
+    box-shadow: var(--box-shadow);
     height: 35px;
     padding: 1%;
     color: rgb(175, 175, 175);
     font-size: 20px;
+}
+
+@media (prefers-color-scheme: light) {
+    .principal-input {
+        color: rgb(126, 126, 126);
+    }
 }
 </style>

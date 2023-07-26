@@ -32,7 +32,7 @@ const storedBills = computed(() => store.getters.storedBills);
     width: 99%;
     max-width: 700px;
     margin: auto;
-    box-shadow: -5px -1px 30px 3px rgba(0, 0, 0, 0.39);
+    box-shadow: var(--box-shadow);
     border-radius: 0.5rem;
 }
 
