@@ -17,6 +17,10 @@ const props = defineProps({
         type: Number,
         required: true,
     },
+    total: {
+        type: String,
+        required: true,
+    }
 });
 const store = useStore();
 
@@ -43,8 +47,31 @@ const showBill = (event) => {
 
 <template>
     <article class="Card" :data-id="props.dataId">
-        <p>{{ props.index }}. Creada el: {{ props.date }}</p>
-        <button :data-id="props.dataId" @click="deleteCard">Borrar</button>
-        <button :data-id="props.dataId" @click="showBill">Ver</button>
+        <p>{{ props.index }}</p>
+        <p>{{ props.total }}</p>
+        <p>{{ props.date }}</p>
+        <div class="card-buttons">
+            <button :data-id="props.dataId" @click="deleteCard">Borrar</button>
+            <button :data-id="props.dataId" @click="showBill">Ver</button>
+        </div>
     </article>
 </template>
+
+<style scoped>
+.Card {
+    border-radius: 0.5rem;
+    width: 90%;
+    padding: 1%;
+    border: 2px solid rgb(94, 94, 94);
+    margin: 1% auto;
+    display: flex;
+    gap: 2%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+}
+</style>

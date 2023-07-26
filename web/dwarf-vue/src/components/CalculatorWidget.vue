@@ -80,7 +80,10 @@ const clear = () => {
     text-align: center;
     box-shadow: -5px -1px 30px 3px rgba(0, 0, 0, 0.39);
     border-radius: 1rem;
-    width: 700px;
+    max-width: 700px;
+    width: 99%;
+    margin: auto;
+
 }
 
 .calc-options {
