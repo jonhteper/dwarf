@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
 import { useStore } from "vuex";
 import { deleteBill } from "../utils/storage";
 import { toast } from "vue3-toastify";
@@ -23,12 +23,12 @@ const props = defineProps({
     },
 });
 const store = useStore();
+const show = ref(true);
 
 const deleteCard = (event) => {
     const id = event.target.dataset.id;
     let aborted = false;
-    const cardBox = event.target.parentElement.parentElement;
-    cardBox.style.display = "none";
+    show.value = false;
 
     toast("Eliminado. <a>Haga click para cancelar.</a>", {
         type: "warning",
@@ -38,7 +38,7 @@ const deleteCard = (event) => {
         transition: "slide",
         onClick: () => {
             aborted = true;
-            cardBox.style.display = "flex";
+            show.value = true;
         },
         onClose: () => {
             if (aborted) {
@@ -54,10 +54,11 @@ const showBill = (event) => {
     const id = event.target.dataset.id;
     store.commit("updateSelectedBill", id);
 };
+
 </script>
 
 <template>
-    <article class="Card" :data-id="props.dataId">
+    <article class="Card" :data-id="props.dataId" v-show="show">
         <p class="number">{{ props.index }}</p>
         <p class="total">{{ props.total }}</p>
         <p class="date">{{ props.date }}</p>
