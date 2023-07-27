@@ -10,7 +10,7 @@ export const tutorial = driver({
     doneBtnText: "Cerrar",
     steps: [
         {
-            element: ".App",
+            element: ".title",
             popover: {
                 title: "Bienvenido",
                 description: "Esta es una calculadora de facturas para RESICO.",
@@ -28,9 +28,7 @@ export const tutorial = driver({
             popover: {
                 title: "Factura a empresa",
                 description:
-                    "Si tienes la cantidad que necesitas libre de impuestos, utiliza esta opción para calcularlos.\
-                Es importante que sepas que en la tabla de resultados el apartado que diga 'Subtotal' es lo que debes \
-                ingresar como importe en el portal del SAT.",
+                    "Si tienes la cantidad que necesitas libre de impuestos, utiliza esta opción para calcularlos.",
             },
         },
         {
@@ -39,8 +37,7 @@ export const tutorial = driver({
                 title: "Desde factura a empresa",
                 description:
                     "Si ya te hicieron el depósito o si quieres saber cuánto obtendrás libre por factura, \
-                utiliza esta opción. Recuerda que en la tabla de resultados el apartado que diga 'Subtotal' es lo que debes \
-                ingresar como importe en el portal del SAT.",
+                utiliza esta opción.",
             },
         },
         {
@@ -72,7 +69,7 @@ export const tutorial = driver({
             popover: {
                 title: "Subtotal",
                 description:
-                    "Esta es la cantidad que debes ingresar en el apartado 'importe' del portal del SAT.",
+                    "Esta es la cantidad que debes ingresar en el apartado 'Valor Unitario' en el portal del SAT.",
             },
         },
         {
@@ -95,7 +92,7 @@ export const tutorial = driver({
         {
             element: ".clear-btn",
             popover: {
-                title: "Borrar",
+                title: "Limpiar",
                 description:
                     "Presiona este botón para borrar los resultados del cálculo y limpiar la cantidad.",
             },
