@@ -13,7 +13,7 @@ const props = defineProps(["results"]);
             title="Libre de impuestos"
             :value="props?.results?.taxesFree || '$ 0'"
         />
-        <TableRow title="Subtotal" :value="props?.results?.subtotal || '$ 0'" />
+        <TableRow class="subtotal" title="Subtotal" :value="props?.results?.subtotal || '$ 0'" />
         <TableRow
             title="Total de la factura"
             :value="props?.results?.total || '$ 0'"

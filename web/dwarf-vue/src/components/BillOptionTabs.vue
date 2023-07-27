@@ -24,6 +24,7 @@ const changeOption = (event) => {
 <template>
     <div class="calc-options">
         <button
+            id="billButton"
             @click="changeOption"
             :data-option="BillOptions.Bill"
             :class="{ active: optionSelected == BillOptions.Bill }"
@@ -31,6 +32,7 @@ const changeOption = (event) => {
             Factura a empresa
         </button>
         <button
+            id="reverseBillButton"
             @click="changeOption"
             :data-option="BillOptions.ReverseBill"
             :class="{ active: optionSelected == BillOptions.ReverseBill }"
