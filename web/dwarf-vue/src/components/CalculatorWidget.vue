@@ -65,9 +65,9 @@ const clear = () => {
                 <CheckIcon />
                 <p class="btn-text">Calcular</p>
             </button>
-            <button class="clear-btn" title="Borrar" @click="clear">
+            <button class="clear-btn" title="Limpiar" @click="clear">
                 <CancelIcon />
-                <p class="btn-text">Borrar</p>
+                <p class="btn-text">Limpiar</p>
             </button>
         </div>
 
