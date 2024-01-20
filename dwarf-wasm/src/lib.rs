@@ -18,7 +18,7 @@ pub struct BillResult {
 impl TryFrom<Bill> for BillResult {
     type Error = rust_decimal::Error;
     fn try_from(bill: Bill) -> Result<Self, Self::Error> {
-        let formatter = Lotus::new("$", 3);
+        let formatter = Lotus::new("$", 2);
         let input_value = f64::try_from(bill.input)?;
         let iva_value = f64::try_from(bill.iva)?;
         let isr_value = f64::try_from(bill.isr)?;
